@@ -27,4 +27,11 @@ mobilelink = []
 for link in soup.find_all('div','col-xs-6 col-sm-4 col-md-3'):
 
     mobilelink.append(link.a['href'])
-print(mobilelink[:5]) 
+# print(mobilelink) 
+print(len(mobilelink))
+for links in mobilelink:
+    print(links)
+    all_data = {}
+    rone = requests.get(links, headers=headers).text
+    soupone = BeautifulSoup(rone,'lxml')
+
