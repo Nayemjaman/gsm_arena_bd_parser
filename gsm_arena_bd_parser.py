@@ -28,8 +28,8 @@ for link in soup.find_all('div','col-xs-6 col-sm-4 col-md-3'):
     mobilelink.append(link.a['href'])
 # print(mobilelink) 
 # print(len(mobilelink))
-for links in mobilelink[:2]:
-    print(links)
+for links in mobilelink:
+    # print(links)
     all_data = {}
     rone = requests.get(links, headers=headers).text
     soupone = BeautifulSoup(rone,'lxml')
@@ -58,7 +58,7 @@ for links in mobilelink[:2]:
     list_of_products.append(all_data)
     # print(all_data) 
 # print(mobilelink)
-print(list_of_products)
+print(len(list_of_products))
 
 with open("sample_product_info.json", "w") as write_file:
     json.dump({"Products": list_of_products}, write_file, sort_keys=True, indent=4, separators=(',', ': '))
