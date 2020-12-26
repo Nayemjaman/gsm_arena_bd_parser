@@ -28,10 +28,36 @@ for link in soup.find_all('div','col-xs-6 col-sm-4 col-md-3'):
 
     mobilelink.append(link.a['href'])
 # print(mobilelink) 
-print(len(mobilelink))
-for links in mobilelink:
+# print(len(mobilelink))
+for links in mobilelink[:2]:
     print(links)
     all_data = {}
     rone = requests.get(links, headers=headers).text
     soupone = BeautifulSoup(rone,'lxml')
+
+    for table in soupone.find_all('table','table table-striped'):
+        # print(table)
+    # iterating every tr of each table
+        temp_heading = ''
+        temp_title = []
+        for t in table:
+            heading = unicodedata.normalize("NFKD",t.th.text)
+            title = unicodedata.normalize("NFKD",t.td.text)
+          
+            if len(heading.strip()) < 1:
+                heading = temp_heading
+                temp_title.append(title)
+                all_data[heading] = temp_title
+                
+            else:
+                temp_title = []
+                heading = unicodedata.normalize("NFKD",t.th.text)
+                temp_heading = heading
+                temp_title.append(title)
+                all_data[heading] = title
+
+    list_of_products.append(all_data)
+    # print(all_data) 
+# print(mobilelink)
+print(list_of_products)
 
