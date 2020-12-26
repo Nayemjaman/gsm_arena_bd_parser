@@ -44,16 +44,15 @@ for links in mobilelink:
             title = unicodedata.normalize("NFKD",t.td.text)
           
             if len(heading.strip()) < 1:
-                heading = temp_heading
-                temp_title.append(title)
-                all_data[heading] = temp_title
-                
+                heading = temp_heading 
+                temp_title.append(title) 
+                all_data[heading] = temp_title               
             else:
                 temp_title = []
-                heading = unicodedata.normalize("NFKD",t.th.text)
+                heading = unicodedata.normalize("NFKD",t.th.text) 
                 temp_heading = heading
-                temp_title.append(title)
-                all_data[heading] = title
+                temp_title.append(title)  
+                all_data[heading] = title 
 
     list_of_products.append(all_data)
     # print(all_data) 
