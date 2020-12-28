@@ -18,14 +18,27 @@ headers = {
         'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
     }
 
-url = 'https://www.gsmarena.com.bd/samsung/'
+
+url = 'https://www.gsmarena.com.bd/brands'
 r = requests.get(url, headers=headers).text
 soup = BeautifulSoup(r,'html.parser')
 
+brands_link = []
 list_of_products = []
 mobilelink = []
-for link in soup.find_all('div','col-xs-6 col-sm-4 col-md-3'):
-    mobilelink.append(link.a['href'])
+
+brand_div = soup.find_all('div', class_='product-thumb')
+for link in brand_div:
+    ab = link.find('a')
+    brands_link.append(link.a['href'])
+for u in brands_link:
+    for x in range(1,4):
+        r = requests.get(u+str(x), headers=headers).text
+        soup_m = BeautifulSoup(r,'html.parser')
+
+    for link in soup_m.find_all('div','col-xs-6 col-sm-4 col-md-3'):
+        mobilelink.append(link.a['href'])
+
 # print(mobilelink) 
 # print(len(mobilelink))
 for links in mobilelink:
@@ -52,12 +65,13 @@ for links in mobilelink:
                 heading = unicodedata.normalize("NFKD",t.th.text) 
                 temp_heading = heading
                 temp_title.append(title)  
-                all_data[heading] = title 
+                all_data[heading] = title
+            
 
     list_of_products.append(all_data)
     # print(all_data) 
 # print(mobilelink)
-print(len(list_of_products))
+# print(len(list_of_products))
 
 with open("sample_product_info.json", "w") as write_file:
     json.dump({"Products": list_of_products}, write_file, sort_keys=True, indent=4, separators=(',', ': '))
