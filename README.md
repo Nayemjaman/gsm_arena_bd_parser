@@ -9,5 +9,5 @@
 
 Welcome to the Gsm_arena_bd_parser repository!
 
-In this project, I scraped news data (from [gsmarena.com.bd](https://www.gsmarena.com.bd/)) using Beautifulsoup4.
-More than 1800+ mobile phone's data.
+In this project, I scraped mobile phone data (from [gsmarena.com.bd](https://www.gsmarena.com.bd/)) using Beautifulsoup4.
+More than 1800+ mobile phone data.
